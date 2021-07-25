@@ -14,10 +14,13 @@ ActiveRecord::Schema.define(version: 20210225074802) do
 
   create_table "zones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
+    t.string   "slug"
+    t.integer  "state"
+    t.integer  "vaccount_id", default: 1
     t.json     "coordinates"
     t.datetime "deleted_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end
