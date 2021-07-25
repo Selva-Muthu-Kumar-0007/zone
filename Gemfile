@@ -66,3 +66,6 @@ group :development do
 end
 
 gem 'unicorn-rails'
+gem 'coveralls', require: false
+
+
