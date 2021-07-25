@@ -29,10 +29,6 @@
 /*.rdb
 .ruby-version
 
-# Ignore db/schema file
-/db/schema.rb
-
-
 # Ignore all Unicorn tmp files
 /pids/*
 
