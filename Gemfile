@@ -68,4 +68,5 @@ end
 gem 'unicorn-rails'
 gem 'coveralls', require: false
 
+gem 'openssl'
 

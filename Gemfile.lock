@@ -126,6 +126,7 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    openssl (2.2.0)
     pry (0.11.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -268,6 +269,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mysql2 (= 0.4.10)
+  openssl
   pry
   rails (= 5.0.1)
   rails-erd
