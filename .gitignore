@@ -37,8 +37,5 @@
 
 .byebug_history
 
-# Ignore RSpec Code Coverage Files
-/coverage/*
-
 # Ignore Local Gem Files
 /vendor/bundle/*
