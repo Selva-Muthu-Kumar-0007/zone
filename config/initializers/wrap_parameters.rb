@@ -12,3 +12,4 @@ end
 # ActiveSupport.on_load(:active_record) do
 #  self.include_root_in_json = true
 # end
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
