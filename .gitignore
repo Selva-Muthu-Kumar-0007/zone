@@ -32,6 +32,9 @@
 # Ignore all Unicorn tmp files
 /pids/*
 
+# Ignore RSpec Code Coverage Files
+/coverage/*
+
 # Ignore all Vs Code files
 /.vscode
 

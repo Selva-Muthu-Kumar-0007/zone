@@ -43,14 +43,13 @@ jobs:
           bundle install
           bin/rails db:setup
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Run tests
         env:
           RAILS_ENV: test
         run: |
           bundle exec rspec -f documentation
 
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

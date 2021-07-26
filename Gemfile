@@ -66,7 +66,7 @@ group :development do
 end
 
 gem 'unicorn-rails'
+
 gem 'coveralls', require: false
-
-gem 'openssl'
-
+# gem 'coveralls_reborn', require: false
+gem 'simplecov-lcov', '~> 0.8.0'
