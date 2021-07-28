@@ -45,14 +45,17 @@ jobs:
 
       - name: Run tests
         env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_KEY }}
+        env:
           RAILS_ENV: test
         run: |
           bundle exec rspec -f documentation
 
       - name: Coveralls
+        env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_KEY }}
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
