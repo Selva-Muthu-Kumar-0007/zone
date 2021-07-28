@@ -1,9 +1,6 @@
 name: RSpec - Unit Testing
 
-on:
-  pull_request:
-    branches: [master]
-    types: [labeled]
+on: [push]
 
 env:
   SOURCE_BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
@@ -22,28 +19,9 @@ jobs:
         - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-      # How to use Redis
-      redis:
-        image: redis
-        ports:
-        - 6379/tcp
-
-      # How to use Elasticsearch
-      elasticsearch:
-        image: elasticsearch:6.8.3
-        ports:
-        - 9200/tcp
-        options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Install SSH keys
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: "Add known public keys of github here"
 
       - name: Verify MySQL
         run: |
@@ -57,13 +35,6 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           ruby-version: 2.4.10 # Not needed with a .ruby-version file
 
-      - name: Verify Elasticsearch
-        env:
-          ELASTIC_SEARCH_URL: http://localhost:${{ job.services.elasticsearch.ports[9200] }}
-        run: |
-          echo $ELASTIC_SEARCH_URL
-          curl -fsSL "$ELASTIC_SEARCH_URL/_cat/health?h=status"
-
       - name: Create DB
         env:
           RAILS_ENV: test
@@ -74,6 +45,29 @@ jobs:
 
       - name: Run tests
         env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_KEY }}
           RAILS_ENV: test
         run: |
           bundle exec rspec -f documentation
+
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Actions job result
+          to: selva8822@gmail.com
+          from: Github Actions
+          secure: true
+          body: Build job of ${{github.repository}} completed successfully!
+          html_body: file://log/test.log
+          cc: selvatheuscitizen@gmail.com
+          bcc: smk@shopf.co
+          reply_to: selvatheuscitizen@gmail.com
+          ignore_cert: true
+          convert_markdown: true
+          attachments: attachments.zip,git.diff,./dist/static/*.js
+          priority: low

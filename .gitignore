@@ -29,20 +29,16 @@
 /*.rdb
 .ruby-version
 
-# Ignore db/schema file
-/db/schema.rb
-
-
 # Ignore all Unicorn tmp files
 /pids/*
+
+# Ignore RSpec Code Coverage Files
+/coverage/*
 
 # Ignore all Vs Code files
 /.vscode
 
 .byebug_history
-
-# Ignore RSpec Code Coverage Files
-/coverage/*
 
 # Ignore Local Gem Files
 /vendor/bundle/*
