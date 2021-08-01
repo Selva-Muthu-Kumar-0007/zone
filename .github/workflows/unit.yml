@@ -50,24 +50,3 @@ jobs:
           RAILS_ENV: test
         run: |
           bundle exec rspec -f documentation
-
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions job result
-          to: selva8822@gmail.com
-          from: Github Actions
-          secure: true
-          body: Build job of ${{github.repository}} completed successfully!
-          html_body: file://log/test.log
-          cc: selvatheuscitizen@gmail.com
-          bcc: smk@shopf.co
-          reply_to: selvatheuscitizen@gmail.com
-          ignore_cert: true
-          convert_markdown: true
-          attachments: attachments.zip,git.diff,./dist/static/*.js
-          priority: low
