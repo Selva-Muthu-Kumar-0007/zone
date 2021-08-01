@@ -12,4 +12,8 @@ class Zone < ActiveRecord::Base
     	selva = 1
     	return selva
     end
+
+    def selva(key)
+    	return STATE[key]
+    end
 end
