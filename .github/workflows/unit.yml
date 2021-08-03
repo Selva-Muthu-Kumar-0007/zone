@@ -39,7 +39,7 @@ jobs:
         env:
           RAILS_ENV: test
         run: |
-          gem install bundler --version 1.17.3 --no-ri --no-rdoc
+          gem install bundler --version 1.17.3
           bundle install
           bin/rails db:setup
 
