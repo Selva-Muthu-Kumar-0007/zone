@@ -1,7 +1,7 @@
 class Zone < ActiveRecord::Base
 
-    validates :name, uniqueness: { scope: [:vaccount_id], message: 'is already present' }
-    validates :slug, uniqueness: { scope: [:vaccount_id], message: 'is already present' }
+    validates :name, uniqueness: { scope: [:vaccount_id], message: 'is already present', case_sensitive: true }
+    validates :slug, uniqueness: { scope: [:vaccount_id], message: 'is already present', case_sensitive: true }
 
     # before_save :create_slug
 
@@ -9,8 +9,11 @@ class Zone < ActiveRecord::Base
     enum state: STATE
 
     def smk
-    	selva = 1
-    	return selva
+        total = 0
+        arr.each{|ele|
+            total+= ele
+        }
+        return total
     end
 
     def selva(key)

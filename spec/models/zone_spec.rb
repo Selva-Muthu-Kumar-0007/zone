@@ -6,8 +6,8 @@ RSpec.describe Zone, type: :model do
   describe 'validations' do
     context 'validates_uniqueness_of' do
       before { create(:zone) }
-      it { should validate_uniqueness_of(:slug).scoped_to(:vaccount_id).with_message('is already present').case_insensitive }
-      it { should validate_uniqueness_of(:name).scoped_to(:vaccount_id).with_message('is already present').case_insensitive }
+      it { should validate_uniqueness_of(:slug).scoped_to(:vaccount_id).with_message('is already present') }
+      it { should validate_uniqueness_of(:name).scoped_to(:vaccount_id).with_message('is already present') }
     end
   end
 end
