@@ -7,4 +7,13 @@ class Zone < ActiveRecord::Base
 
     STATE = {active: 1, inactive: 2, deleted: 3}
     enum state: STATE
+
+    def smk
+    	selva = 1
+    	return selva
+    end
+
+    def selva(key)
+    	return STATE[key]
+    end
 end
