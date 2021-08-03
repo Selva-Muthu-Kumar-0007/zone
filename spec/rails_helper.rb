@@ -5,9 +5,18 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'coveralls'
 Coveralls.wear!
 
+require 'simplecov'
+require 'simplecov-lcov'
+SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+SimpleCov.start do
+  # For RSpec
+  add_filter(/^\/spec\//)
+  # Report branch coverage to trigger branch-level undercover warnings
+  # enable_coverage :branch
+end
+require 'undercover'
 
-require 'simplecov' 
-SimpleCov.start
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?

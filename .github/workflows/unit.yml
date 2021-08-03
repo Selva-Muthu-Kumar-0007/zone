@@ -33,13 +33,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          ruby-version: 2.4.10 # Not needed with a .ruby-version file
+          ruby-version: 2.6.5 # Not needed with a .ruby-version file
 
       - name: Create DB
         env:
           RAILS_ENV: test
         run: |
-          gem install bundler --version 1.17.3 --no-ri --no-rdoc
+          gem install bundler --version 1.17.3
           bundle install
           bin/rails db:setup
 
@@ -49,4 +49,12 @@ jobs:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_KEY }}
           RAILS_ENV: test
         run: |
-          bundle exec rspec -f documentation
+          bundle exec rspec
+
+      - name: Run undercover
+        env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_KEY }}
+          RAILS_ENV: test
+        run: |
+          bundle exec undercover
