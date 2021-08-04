@@ -58,3 +58,4 @@ jobs:
           RAILS_ENV: test
         run: |
           bundle exec undercover
+          ruby -e "$(curl -s https://undercover-ci.com/uploader.rb)" -- --repo selva8822/zone --commit ${{ github.sha }} --lcov coverage/lcov/zone.lcov

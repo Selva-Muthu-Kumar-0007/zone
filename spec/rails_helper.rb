@@ -3,19 +3,26 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear!('rails')
+require 'undercover'
 
 require 'simplecov'
 require 'simplecov-lcov'
-SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
-SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
 SimpleCov.start do
   # For RSpec
   add_filter(/^\/spec\//)
   # Report branch coverage to trigger branch-level undercover warnings
   # enable_coverage :branch
+
+  formatter SimpleCov::Formatter::MultiFormatter.new(
+    [
+      SimpleCov::Formatter::SimpleFormatter,
+      SimpleCov::Formatter::HTMLFormatter
+    ]
+  )
+
 end
-require 'undercover'
+SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
