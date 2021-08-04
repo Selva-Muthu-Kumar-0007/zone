@@ -18,6 +18,7 @@ SimpleCov.start do
     [
       SimpleCov::Formatter::SimpleFormatter,
       SimpleCov::Formatter::LcovFormatter,
+      Coveralls::SimpleCov::Formatter,
       SimpleCov::Formatter::HTMLFormatter
     ]
   )
