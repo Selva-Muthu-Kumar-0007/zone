@@ -49,6 +49,7 @@ group :development, :test do
   gem 'factory_bot_rails', require: false
   gem 'simplecov', require: false
   gem 'simplecov-lcov', require: false
-  gem 'coveralls', require: false
-  gem 'undercover'
 end
+
+gem 'coveralls', require: false
+gem 'undercover'
