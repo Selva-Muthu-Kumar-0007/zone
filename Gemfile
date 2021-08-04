@@ -47,9 +47,11 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
 
   gem 'factory_bot_rails', require: false
-  gem 'simplecov', '~> 0.17.0', require: false
-  gem 'simplecov-lcov', require: false
+  # gem 'simplecov', '~> 0.17.0', require: false
+  gem 'simplecov'
+  gem 'simplecov-lcov'
 end
 
-gem 'coveralls', require: false
+# gem 'coveralls', require: false
+gem 'coveralls_reborn', require: false
 gem 'undercover'

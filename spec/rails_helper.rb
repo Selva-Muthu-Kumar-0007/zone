@@ -8,20 +8,20 @@ require 'undercover'
 
 require 'simplecov'
 require 'simplecov-lcov'
-SimpleCov.start do
+
+SimpleCov.start 'rails' do
   # For RSpec
   add_filter(/^\/spec\//)
+
   # Report branch coverage to trigger branch-level undercover warnings
   # enable_coverage :branch
 
-  formatter SimpleCov::Formatter::MultiFormatter.new(
-    [
-      SimpleCov::Formatter::SimpleFormatter,
-      SimpleCov::Formatter::LcovFormatter,
-      Coveralls::SimpleCov::Formatter,
-      SimpleCov::Formatter::HTMLFormatter
-    ]
-  )
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+    # SimpleCov::Formatter::SimpleFormatter,
+    SimpleCov::Formatter::LcovFormatter,
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ])
 
 end
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
