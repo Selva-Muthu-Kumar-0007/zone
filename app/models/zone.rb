@@ -15,8 +15,4 @@ class Zone < ActiveRecord::Base
         }
         return total
     end
-
-    def selva(key)
-    	return STATE[key]
-    end
 end
