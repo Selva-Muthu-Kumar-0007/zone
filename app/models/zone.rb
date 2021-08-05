@@ -15,12 +15,4 @@ class Zone < ActiveRecord::Base
         }
         return total
     end
-
-    def smk
-        total = 0
-        arr.each{|ele|
-            total+= ele
-        }
-        return total
-    end
 end
