@@ -15,4 +15,9 @@ class Zone < ActiveRecord::Base
         }
         return total
     end
+
+    def newly_added
+        total = 0
+        return total
+    end
 end
