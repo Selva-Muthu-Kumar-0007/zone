@@ -8,7 +8,7 @@ class Zone < ActiveRecord::Base
     STATE = {active: 1, inactive: 2, deleted: 3}
     enum state: STATE
 
-    def smk
+    def sum(arr)
         total = 0
         arr.each{|ele|
             total+= ele
@@ -16,7 +16,8 @@ class Zone < ActiveRecord::Base
         return total
     end
 
-    def selva(key)
-    	return STATE[key]
+    def newly_added
+        total = 0
+        return total
     end
 end

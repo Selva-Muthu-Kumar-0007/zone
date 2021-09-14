@@ -1,0 +1,13 @@
+1. Using Basic Coveralls 
+	- gem 'simplecov', '~> 0.17.0'
+	- Using JSON formatter
+	- Creating Blank LCOV file
+
+2. Using Coveralls Reborn
+	
+
+3. Without Coveralls
+	1. Using Simple Cov Older - 0.17
+		- Hitting Error (branch_coverage)
+	2. Using SimpleCov Recent - 0.21
+		- Proper LCOV file

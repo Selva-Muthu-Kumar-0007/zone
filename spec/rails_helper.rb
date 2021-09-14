@@ -3,20 +3,31 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear!('rails')
+require 'undercover'
 
 require 'simplecov'
 require 'simplecov-lcov'
-SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
-SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
-SimpleCov.start do
+
+SimpleCov.start 'rails' do
   # For RSpec
   add_filter(/^\/spec\//)
+  add_group "ApiHelpers", 'app/api_helpers'
+  add_group "Jobs", 'app/helpers/job_helper'
+  add_group "Services", ['app/services', 'app/decorators', 'app/validators'] 
+  # add_group "Decorators" "app/decorators"
+
   # Report branch coverage to trigger branch-level undercover warnings
   # enable_coverage :branch
-end
-require 'undercover'
 
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+    # SimpleCov::Formatter::SimpleFormatter,
+    SimpleCov::Formatter::LcovFormatter,
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ])
+end
+SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -51,6 +62,7 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Request::RequestHelper
   
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
